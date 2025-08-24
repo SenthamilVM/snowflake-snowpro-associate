@@ -1,0 +1,25 @@
+--Use Database and Schema
+
+USE DATABASE LA_DB;
+
+USE SCHEMA LA_SCHEMA;
+
+--Creating view/Non Materialized view
+
+CREATE OR REPLACE VIEW MyTable_View AS
+SELECT * FROM MY_TABLE;
+
+--Creating Materialized View
+CREATE OR REPLACE MATERIALIZED VIEW MyTable_ViewMV 
+AS
+SELECT * FROM MY_TABLE
+WHERE ID = 3;
+
+--Creating Secure view
+CREATE OR REPLACE SECURE MATERIALIZED VIEW MyTable_View_MVS
+AS
+SELECT * FROM MY_TABLE
+WHERE ID = 3;
+
+--Showing all views
+SHOW VIEWS;
