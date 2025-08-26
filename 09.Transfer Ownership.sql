@@ -1,0 +1,32 @@
+--Use DB and schema
+
+USE DATABASE LA_DB;
+USE SCHEMA LA_SCHEMA;
+
+--Use account admin and WH
+USE ROLE ACCOUNTADMIN;
+USE WAREHOUSE compute_wh;
+
+--Display schema details
+SHOW SCHEMAS;
+
+--Create a new role Analyst
+
+CREATE OR REPLACE ROLE Analyst;
+
+GRANT OWNERSHIP ON SCHEMA LA_DB.LA_SCHEMA TO ROLE Analyst;
+
+SHOW GRANTS ON SCHEMA LA_DB.LA_SCHEMA;
+
+--Dummy role 2 has an usage access of this schema 
+REVOKE USAGE ON SCHEMA LA_DB.LA_SCHEMA FROM ROLE DUMMY_ROLE2;
+
+--Now change the ownership
+GRANT OWNERSHIP ON SCHEMA LA_DB.LA_SCHEMA TO ROLE Analyst;
+
+--Details about information schema
+GRANT ROLE ANALYST TO ROLE SYSADMIN;
+
+SELECT * FROM LA_DB.INFORMATION_SCHEMA.TABLES;
+
+SELECT * FROM LA_DB.INFORMATION_SCHEMA.VIEWS;
