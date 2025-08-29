@@ -1,0 +1,56 @@
+--USE Database and schema
+USE DATABASE LA_DB;
+USE SCHEMA LA_SCHEMA;
+
+--Use Accountadmin and WH
+USE ROLE ACCOUNTADMIN;
+USE WAREHOUSE COMPUTE_WH;
+
+--Create permanent table -- A normal will be permanent. There is no permanent keyword.
+CREATE OR REPLACE TABLE PERMANENT_TABLE
+(
+ID INT,
+NAME VARCHAR, -- When we don't specify varchar size, by default VARCHAR(16777216) will be assigned.
+DATE DATE
+);
+
+
+--Create Temporary table
+CREATE OR REPLACE TEMPORARY TABLE TEMPORARY_TABLE
+(
+ID INT,
+NAME VARCHAR,
+DATE DATE
+);
+
+--Create Transient table
+CREATE OR REPLACE TRANSIENT TABLE TRANSIENT_TABLE
+(
+ID INT,
+NAME VARCHAR,
+DATE DATE
+);
+
+--Get the DDl statement for the table
+SELECT GET_DDL('TABLE', 'TEMPORARY_TABLE');
+
+--Insert data to the tables
+INSERT INTO PERMANENT_TABLE (ID, NAME, DATE)
+VALUES(1, 'John', '2012-09-11');
+
+INSERT INTO TEMPORARY_TABLE (ID, NAME, DATE)
+VALUES(2, 'Jane', '2012-08-12');
+
+INSERT INTO TRANSIENT_TABLE (ID, NAME, DATE)
+VALUES(3, 'Jill', '2012-10-09');
+
+
+--Display table's meta data
+SHOW TABLES;
+
+--View data from the tables
+SELECT * FROM PERMANENT_TABLE;
+SELECT * FROM TEMPORARY_TABLE;
+SELECT * FROM TRANSIENT_TABLE;
+
+DROP TABLE PERMANENT_TABLE;
